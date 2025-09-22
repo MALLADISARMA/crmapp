@@ -1,0 +1,48 @@
+@page
+@model crmapp.Pages.Customers.index
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h2>Customers</h2>
+
+<a asp-page="Create" class="btn btn-success mb-3">Create New Customer</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Company</th>
+            <th>Notes</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var customer in Model.CustomersList)
+    {
+        <tr>
+            <td>@customer.Id</td>
+            <td>@customer.Firstname</td>
+            <td>@customer.Lastname</td>
+            <td>@customer.Email</td>
+            <td>@customer.Phone</td>
+            <td>@customer.Address</td>
+            <td>@customer.Company</td>
+            <td>@customer.Notes</td>
+            <td>@customer.CreatedAt</td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@customer.Id" class="btn btn-primary btn-sm">Edit</a>
+                <form method="post" asp-page-handler="Delete" asp-route-id="@customer.Id" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
